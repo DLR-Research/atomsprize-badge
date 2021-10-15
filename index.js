@@ -74,11 +74,6 @@ const cleanup_browser = async () => {
 }
 
 const get_png = async event => {
-  const sqlPromise = runSql(`
-    SELECT total_donated, total_referred
-    FROM impact
-    WHERE campaign_id = ${Number(event.campaign_id)} AND user_id = ${Number(event.user_id)}
-  `)
   const browserConnected = browser?.isConnected()
   if (!browserConnected) {
     await cleanup_browser()
@@ -99,11 +94,9 @@ const get_png = async event => {
     await new_browser()
     await open_page()
   }
-  const { records } = await sqlPromise
   const donor = {
     user_id: Number(event.user_id),
-    total_donated: Number(records[0][0].stringValue),
-    total_referred: Number(records[0][1].stringValue)
+    total_donated: Number(event.total_donated)
   }
 
   const png = await page.evaluate(donor => {

@@ -4,7 +4,7 @@
     "format": "prettier --write '**/*.{ts,tsx,json,js,yaml,css,html}'"
   },
   "dependencies": {
-    "sharp": "^0.29.1"
+    "sharp": "^0.30.5"
   },
   "devDependencies": {
     "aws-sdk": "^2.1007.0",
